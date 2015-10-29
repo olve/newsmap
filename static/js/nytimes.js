@@ -24,27 +24,31 @@ function newswireResponseToGeoJson(response) {
 	var data = JSON.parse(response);
 	var features = [];
 	data.results.forEach(function(result) {
-		var country = result.geo_facet[0];
+		if (result.hasOwnProperty("geo_facet")) {
+			var country = result.geo_facet[0];
 
-		//sometimes the country is denoted as such: "Baghdad (Iraq)"
-		var space = country.indexOf(" (");
-		if (space > -1) {
-			country = country.substring(space+2, country.length-1);
-		}
+			if (country) {
 
-		if (country && COUNTRY_CAPITAL_COORDINATES.hasOwnProperty(country)) {
-			var capital =  COUNTRY_CAPITAL_COORDINATES[country];
-
-			var geoJsonObject = {
-				type: "Feature",
-				properties: result,
-				geometry: {
-					type: "Point",
-					coordinates: [parseInt(capital.CapitalLongitude), parseInt(capital.CapitalLatitude)],
+				//sometimes the country is denoted as such: "Baghdad (Iraq)"
+				var space = country.indexOf(" (");
+				if (space > -1) {
+					country = country.substring(space+2, country.length-1);
 				}
-			};
-			console.log(geoJsonObject);
-			features.push(geoJsonObject);
+
+				if (country && COUNTRY_CAPITAL_COORDINATES.hasOwnProperty(country)) {
+					var capital =  COUNTRY_CAPITAL_COORDINATES[country];
+
+					var geoJsonObject = {
+						type: "Feature",
+						properties: result,
+						geometry: {
+							type: "Point",
+							coordinates: [parseInt(capital.CapitalLongitude), parseInt(capital.CapitalLatitude)],
+						}
+					};
+					features.push(geoJsonObject);
+				}
+			}
 		}
 	});
 
