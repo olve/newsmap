@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="static/css/newsmap.css">
+	</head>
+	<body>
+		<div id="map"></div>
+
+		<!-- Load scripts with defer. Browser will run scripts when the page has finished parsing, but wont wait for images to load -->
+		<script defer type="text/javascript" src="static/js/COUNTRY_CAPITAL_COORDINATES.js"></script>
+		<script defer type="text/javascript" src="static/js/GET.js"></script>
+
+		<script defer type="text/javascript" src="static/js/nytimes.js"></script>
+		<script defer type="text/javascript" src="static/js/newsmap.js"></script>
+
+		<!-- This is my API key. I have to make it public here so that the app can be fully client-side. Please don't use my API keys. Getting your own is free -->
+		<script defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMZjw8WrD1Xuxn6jWlNNHoV2QW8rVHcto&callback=initMap"></script>
+	</body>
+</html>
