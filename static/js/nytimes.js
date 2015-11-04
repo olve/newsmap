@@ -43,7 +43,7 @@ function newswireResponseToGeoJson(response) {
 						properties: result,
 						geometry: {
 							type: "Point",
-							coordinates: [parseInt(capital.CapitalLongitude), parseInt(capital.CapitalLatitude)],
+							coordinates: [parseFloat(capital.CapitalLongitude), parseFloat(capital.CapitalLatitude)],
 						}
 					};
 					features.push(geoJsonObject);
